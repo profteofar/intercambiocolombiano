@@ -9,7 +9,51 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+  <script>
+    // Inline Lucide replacement for offline functionality
+    const lucide = {
+      createIcons: () => {
+        const icons = {
+          home: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+          'book-open': '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+          timer: '<line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/>',
+          sliders: '<line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/>',
+          'file-text': '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/>',
+          layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+          book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+          'play-circle': '<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>',
+          'bar-chart-2': '<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>',
+          menu: '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
+          info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+          'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+          'arrow-left': '<line x1="19" x2="5" y1="12" y2="12"/><polyline points="12 19 5 12 12 5"/>',
+          'arrow-right': '<line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/>',
+          shuffle: '<path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l14.2-12.6c.8-1 2-1.7 3.3-1.7H22"/><path d="M2 6h1.4c1.3 0 2.5.6 3.3 1.7l2.9 2.6"/><path d="M22 18h-2.1c-1.3 0-2.5-.6-3.3-1.7L13.7 13.7"/>',
+          'rotate-ccw': '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+          trophy: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>'
+        };
+
+        document.querySelectorAll('[data-lucide]').forEach(el => {
+          const key = el.getAttribute('data-lucide');
+          if (icons[key]) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '24');
+            svg.setAttribute('height', '24');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '2');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
+            svg.classList.add('lucide', `lucide-${key}`);
+            if (el.style.cssText) svg.style.cssText = el.style.cssText;
+            svg.innerHTML = icons[key];
+            el.replaceWith(svg);
+          }
+        });
+      }
+    };
+  </script>
   <style>
     :root {
       --stone-50: #fafaf9;
@@ -510,7 +554,9 @@
     }
 
     .timer-ring svg {
-      transform: rotate(-90deg)
+      transform: rotate(-90deg);
+      width: 60px;
+      height: 60px;
     }
 
     .timer-num {
@@ -2524,7 +2570,7 @@
                 China e em África, substituindo culturas menos calóricas como o sorgo e o milhete.</p>
               <p><strong>A Quina (Cinchona)</strong> — Um dos maiores contributos. A casca desta árvore andina fornece o
                 quinino, o primeiro tratamento eficaz contra a malária. Este remédio americano permitiu que os europeus
-                colonizassem o interior de África e do Pacífico.</p>
+                colonizassem o interior de África e do Pacífico séculos depois do Intercâmbio.</p>
               <p><strong>Cacau e Tabaco</strong> — Itens que transformaram a cultura europeia e geraram enormes fluxos
                 comerciais, mas também estigma social inicial (o tabaco era associado a vícios).</p>
             </div>
@@ -2650,7 +2696,8 @@
           <div class="accordion-body">
             <div class="accordion-content">
               <p>A <strong>Pequena Idade do Gelo</strong> foi um período de arrefecimento global entre aproximadamente
-                1300 e 1870, com o ponto mais baixo das temperaturas no <strong>século XVI</strong>. É caracterizado por invernos
+                1300 e 1870, com o ponto mais baixo das temperaturas no <strong>século XVI</strong>. É caracterizado por
+                invernos
                 rigorosos, verões curtos e glaciares em expansão.</p>
               <p>O conceito de <strong>Albedo</strong> é fundamental: representa a capacidade da superfície terrestre de
                 refletir os raios solares. Superfícies brancas (como neve e gelo) refletem mais luz solar de volta para
@@ -2765,6 +2812,367 @@
     </div>
   </div>
 
+  <!-- GUIDE OVERLAY (FIXED) -->
+  <div class="modal-overlay" id="guide-overlay" onclick="handleGuideClick(event)">
+    <div class="guide-modal" style="background:var(--bg); max-height: 80vh; display: flex; flex-direction: column;">
+      <div class="guide-header">
+        <h2>📘 Guia de Utilizador</h2>
+        <p>Tudo o que precisas saber para tirar o máximo partido desta aplicação de estudo.</p>
+      </div>
+
+      <div class="guide-body" id="guide-body">
+
+        <!-- 1. MODOS DE ESTUDO -->
+        <div class="guide-acc-item open" id="gacc-1">
+          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-1')">
+            <div class="guide-acc-icon-wrap">🎓</div>
+            <div style="flex:1">
+              <div class="guide-acc-title">Modos de Estudo</div>
+              <div class="guide-acc-sub">Como usar cada modo disponível</div>
+            </div>
+            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="guide-acc-body">
+            <div class="guide-acc-content">
+              <div class="gc-mode-row">
+                <div class="gc-mode-badge">📖</div>
+                <div>
+                  <div class="gc-mode-label">Modo Estudo</div>
+                  <div class="gc-mode-desc"><strong>45 questões</strong> com feedback imediato após cada resposta. Se
+                    demorares, surgem dicas automáticas aos <strong>30s</strong> e <strong>60s</strong>. Podes saltar
+                    questões, revê-las pelo tracker visual e recomeçar quando quiseres.</div>
+                </div>
+              </div>
+              <div class="gc-mode-row">
+                <div class="gc-mode-badge">⏱️</div>
+                <div>
+                  <div class="gc-mode-label">Modo Teste</div>
+                  <div class="gc-mode-desc"><strong>25 questões</strong> em <strong>10 minutos</strong>. Cada questão
+                    tem um limite de <strong>30 segundos</strong> — se não responderes, avança automaticamente. Sem
+                    feedback durante o teste. Resultados detalhados e revisão completa no final.</div>
+                </div>
+              </div>
+              <div class="gc-mode-row">
+                <div class="gc-mode-badge">🎯</div>
+                <div>
+                  <div class="gc-mode-label">Modo Personalizado</div>
+                  <div class="gc-mode-desc">Filtra as questões por <strong>tópico</strong> usando os chips de seleção.
+                    Ideal para rever especificamente as áreas onde tens mais dificuldade. Tem as mesmas funcionalidades
+                    do Modo Estudo.</div>
+                </div>
+              </div>
+              <div class="gc-mode-row">
+                <div class="gc-mode-badge">🃏</div>
+                <div>
+                  <div class="gc-mode-label">Flash Cards</div>
+                  <div class="gc-mode-desc"><strong>12 cartões</strong> com conceito na frente e definição no verso.
+                    Clica no cartão para virar. Usa os botões de navegação ou o botão <em>Baralhar</em> para praticar em
+                    ordem aleatória.</div>
+                </div>
+              </div>
+              <div class="gc-mode-row">
+                <div class="gc-mode-badge">🎮</div>
+                <div>
+                  <div class="gc-mode-label">Quiz Cards</div>
+                  <div class="gc-mode-desc">O cartão <strong>só vira</strong> quando escolhes a resposta correta.
+                    Aprendizagem por tentativa e erro — sem frustração, com reforço positivo imediato.</div>
+                </div>
+              </div>
+              <div class="gc-mode-row" style="border-bottom:none;padding-bottom:0">
+                <div class="gc-mode-badge">📝</div>
+                <div>
+                  <div class="gc-mode-label">Resumos Explicativos</div>
+                  <div class="gc-mode-desc"><strong>7 temas</strong> em acordeão expandível, baseados nas fontes
+                    académicas. Clica no título de qualquer tema para o expandir e ler o conteúdo detalhado.</div>
+                </div>
+              </div>
+              <div class="guide-tip">💡 <strong>Sugestão pedagógica:</strong> Começa pelos <strong>Resumos</strong> para
+                consolidar a teoria, depois pratica no <strong>Modo Estudo</strong>, e só então avalia-te no
+                <strong>Modo Teste</strong>!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. TIPOS DE QUESTÕES -->
+        <div class="guide-acc-item" id="gacc-2">
+          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-2')">
+            <div class="guide-acc-icon-wrap">❓</div>
+            <div style="flex:1">
+              <div class="guide-acc-title">Tipos de Questões</div>
+              <div class="guide-acc-sub">Como responder a cada formato</div>
+            </div>
+            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="guide-acc-body">
+            <div class="guide-acc-content">
+              <div class="gc-step">
+                <div class="gc-step-dot">A</div>
+                <div>
+                  <div class="gc-step-title">Escolha Múltipla (MC) — 39 questões</div>
+                  <div class="gc-step-desc">Quatro opções (A, B, C, D). Clica numa para responder. O feedback surge
+                    imediatamente com a explicação detalhada da resposta correta.</div>
+                </div>
+              </div>
+              <div class="gc-step">
+                <div class="gc-step-dot">☑</div>
+                <div>
+                  <div class="gc-step-title">Seleção Múltipla — 2 questões</div>
+                  <div class="gc-step-desc">Identificadas por <strong>"Seleciona TODAS as corretas"</strong>. Marca
+                    todas as opções que considerares corretas e clica em <strong>Confirmar</strong>. Tens de acertar em
+                    todas para pontuar.</div>
+                </div>
+              </div>
+              <div class="gc-step">
+                <div class="gc-step-dot">V/F</div>
+                <div>
+                  <div class="gc-step-title">Verdadeiro / Falso — 4 questões</div>
+                  <div class="gc-step-desc">Dois botões: <span
+                      style="color:var(--success);font-weight:600">Verdadeiro</span> e <span
+                      style="color:var(--error);font-weight:600">Falso</span>. Se errares, a aplicação mostra a
+                    afirmação corrigida com a explicação completa.</div>
+                </div>
+              </div>
+              <div class="gc-step">
+                <div class="gc-step-dot">💡</div>
+                <div>
+                  <div class="gc-step-title">Sistema de Dicas Progressivas</div>
+                  <div class="gc-step-desc">No Modo Estudo e Personalizado, se estiveres mais de <strong>30
+                      segundos</strong> sem responder, aparece o botão <em>Dica 1</em>. Após <strong>60
+                      segundos</strong>, aparece a <em>Dica 2</em>. Clica para as revelar.</div>
+                </div>
+              </div>
+              <div class="gc-step" style="border-bottom:none;padding-bottom:0">
+                <div class="gc-step-dot">⏭</div>
+                <div>
+                  <div class="gc-step-title">Navegação Livre</div>
+                  <div class="gc-step-desc">Usa o <strong>tracker visual</strong> no topo (quadradinhos numerados) para
+                    saltar para qualquer questão. As cores mostram o estado: <span style="color:var(--success)">■
+                      certa</span>, <span style="color:var(--error)">■ errada</span>, ■ atual.</div>
+                </div>
+              </div>
+              <div class="guide-tip">🎯 As questões têm 3 níveis de dificuldade: <strong>🟢 Fácil (10 pts) · 🟡 Médio
+                  (20 pts) · 🔴 Difícil (30 pts)</strong>. Questões mais difíceis valem mais pontos!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. PONTOS & BADGES -->
+        <div class="guide-acc-item" id="gacc-3">
+          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-3')">
+            <div class="guide-acc-icon-wrap">🏆</div>
+            <div style="flex:1">
+              <div class="guide-acc-title">Pontos &amp; Badges</div>
+              <div class="guide-acc-sub">Sistema de recompensas e progressão</div>
+            </div>
+            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="guide-acc-body">
+            <div class="guide-acc-content">
+              <div class="gc-pts-row">
+                <span class="gc-pts-lbl">🟢 Questão Fácil (Modo Estudo / Personalizado)</span>
+                <span class="gc-pts-val">+10 pts</span>
+              </div>
+              <div class="gc-pts-row">
+                <span class="gc-pts-lbl">🟡 Questão Média (Modo Estudo / Personalizado)</span>
+                <span class="gc-pts-val">+20 pts</span>
+              </div>
+              <div class="gc-pts-row">
+                <span class="gc-pts-lbl">🔴 Questão Difícil (Modo Estudo / Personalizado)</span>
+                <span class="gc-pts-val">+30 pts</span>
+              </div>
+              <div class="gc-pts-row" style="border-bottom:none">
+                <span class="gc-pts-lbl">⏱️ Qualquer questão correta (Modo Teste)</span>
+                <span class="gc-pts-val">+15 pts</span>
+              </div>
+              <div
+                style="margin:14px 0 10px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">
+                🔥 Streak — Série de respostas certas</div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:14px">Responde
+                corretamente várias vezes <strong>sem errar</strong> para manter a tua série. Se errares, a série
+                recomeça a zero. A tua melhor série fica guardada no <strong>Dashboard</strong>. Com 3+ respostas
+                seguidas, aparece uma barra de chamas 🔥 no topo do modo.</div>
+              <div
+                style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">
+                🏅 Badges disponíveis</div>
+              <div class="gc-badge-grid">
+                <div class="gc-badge-card">
+                  <div class="gc-badge-em">🌱</div>
+                  <div>
+                    <div class="gc-badge-name">Designer Iniciante</div>
+                    <div class="gc-badge-cond">15 respostas certas seguidas no Modo Estudo ou Personalizado</div>
+                  </div>
+                </div>
+                <div class="gc-badge-card">
+                  <div class="gc-badge-em">🎓</div>
+                  <div>
+                    <div class="gc-badge-name">Designer Expert</div>
+                    <div class="gc-badge-cond">Acumular 500 ou mais pontos no total</div>
+                  </div>
+                </div>
+                <div class="gc-badge-card">
+                  <div class="gc-badge-em">💎</div>
+                  <div>
+                    <div class="gc-badge-name">Perfeccionista</div>
+                    <div class="gc-badge-cond">100% de acertos num Modo Teste completo</div>
+                  </div>
+                </div>
+                <div class="gc-badge-card">
+                  <div class="gc-badge-em">🔥</div>
+                  <div>
+                    <div class="gc-badge-name">Em Chamas</div>
+                    <div class="gc-badge-cond">25 respostas certas seguidas no Modo Estudo ou Personalizado</div>
+                  </div>
+                </div>
+              </div>
+              <div class="guide-tip">📊 Vai ao <strong>Dashboard</strong> (menu lateral) para veres as tuas estatísticas
+                detalhadas por modo, a tua melhor série e os badges já conquistados.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. MULTIMÉDIA -->
+        <div class="guide-acc-item" id="gacc-4">
+          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-4')">
+            <div class="guide-acc-icon-wrap">🎬</div>
+            <div style="flex:1">
+              <div class="guide-acc-title">Recursos Multimédia</div>
+              <div class="guide-acc-sub">Como aceder e usar cada recurso</div>
+            </div>
+            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="guide-acc-body">
+            <div class="guide-acc-content">
+              <div class="gc-file">
+                <div class="gc-file-icon">🗺️</div>
+                <div>
+                  <div class="gc-file-name">Infografia</div>
+                  <div><span class="gc-file-path">./infografia.jpg</span></div>
+                  <div class="gc-file-desc">Abre numa janela modal. Clica na imagem para aplicar um <strong>zoom
+                      adicional</strong> e explorar os detalhes. Clica fora para fechar.</div>
+                </div>
+              </div>
+              <div class="gc-file">
+                <div class="gc-file-icon">🎥</div>
+                <div>
+                  <div class="gc-file-name">Vídeo Resumo</div>
+                  <div><span class="gc-file-path">./video.mp4</span></div>
+                  <div class="gc-file-desc">Reproduz diretamente no browser com os controlos nativos (play, pausa,
+                    volume, ecrã inteiro).</div>
+                </div>
+              </div>
+              <div class="gc-file">
+                <div class="gc-file-icon">🎧</div>
+                <div>
+                  <div class="gc-file-name">Podcast</div>
+                  <div><span class="gc-file-path">./podcast.mp3</span></div>
+                  <div class="gc-file-desc">Player de áudio integrado. Podes <strong>ouvir enquanto estudas</strong>
+                    noutras secções da aplicação — mantém a janela modal aberta.</div>
+                </div>
+              </div>
+              <div class="gc-file" style="border-bottom:none;padding-bottom:0">
+                <div class="gc-file-icon">📊</div>
+                <div>
+                  <div class="gc-file-name">Slides (1 a 14)</div>
+                  <div><span class="gc-file-path">./slides1.jpg</span> … <span
+                      class="gc-file-path">./slides14.jpg</span></div>
+                  <div class="gc-file-desc">Navega com os botões <strong>← →</strong> ou clica nos
+                    <strong>pontos</strong> de navegação. No teclado, usa as <strong>teclas ← →</strong>. Clica em
+                    qualquer slide para zoom. A tecla <strong>Esc</strong> fecha o modal.
+                  </div>
+                </div>
+              </div>
+              <div class="guide-tip">📁 <strong>Instalação:</strong> Coloca todos os ficheiros de media (<code
+                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">infografia.jpg</code>,
+                <code
+                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">video.mp4</code>,
+                <code
+                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">podcast.mp3</code>,
+                <code
+                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">slides1.jpg</code>…<code
+                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">slides14.jpg</code>)
+                <strong>na mesma pasta</strong> que este ficheiro HTML.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. TOUR GUIADO -->
+        <div class="guide-acc-item" id="gacc-5">
+          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-5')">
+            <div class="guide-acc-icon-wrap">🗺️</div>
+            <div style="flex:1">
+              <div class="guide-acc-title">Tour Guiado da Interface</div>
+              <div class="guide-acc-sub">Percorre os elementos principais em 6 passos</div>
+            </div>
+            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </div>
+          <div class="guide-acc-body">
+            <div class="guide-acc-content">
+              <div class="gc-step">
+                <div class="gc-step-dot">1</div>
+                <div>
+                  <div class="gc-step-title">Menu de Navegação (Sidebar)</div>
+                  <div class="gc-step-desc">Acesso a todos os modos de estudo, conteúdos e Dashboard. Visível em
+                    desktop; em mobile abre com o botão ☰.</div>
+                </div>
+              </div>
+              <div class="gc-step">
+                <div class="gc-step-dot">2</div>
+                <div>
+                  <div class="gc-step-title">Contador de Pontos</div>
+                  <div class="gc-step-desc">No fundo do menu lateral — atualizado em tempo real após cada resposta
+                    correta.</div>
+                </div>
+              </div>
+              <div class="gc-step">
+                <div class="gc-step-dot">3</div>
+                <div>
+                  <div class="gc-step-title">Barra Superior (Topbar)</div>
+                  <div class="gc-step-desc">Mostra o título da página atual e ações contextuais. O botão
+                    <strong>?</strong> abre sempre este guia.
+                  </div>
+                </div>
+              </div>
+              <div class="gc-step">
+                <div class="gc-step-dot">4</div>
+                <div>
+                  <div class="gc-step-title">Painel de Início</div>
+                  <div class="gc-step-desc">Cartões de acesso rápido a todos os modos. Clica num cartão para começar
+                    imediatamente.</div>
+                </div>
+              </div>
+              <div class="gc-step" style="border-bottom:none;padding-bottom:0">
+                <div class="gc-step-dot">5</div>
+                <div>
+                  <div class="gc-step-title">Dashboard</div>
+                  <div class="gc-step-desc">Estatísticas por modo, tabela de progresso, badges conquistados e botão para
+                    limpar o histórico.</div>
+                </div>
+              </div>
+              <div class="guide-tour-launch">
+                <button class="btn btn-primary" onclick="closeGuide();startTour()">🚀 Iniciar Tour Interativo</button>
+                <p>O tour destaca 6 elementos com balões explicativos.<br>Usa o botão <strong>Próximo →</strong> ou a
+                  tecla <strong>Esc</strong> para sair.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- .guide-body -->
+    </div>
+  </div>
+
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
@@ -2804,7 +3212,7 @@
       {
         id: 4, topic: "Conceitos Base", type: "mc", difficulty: 2,
         q: "Quantos anos de isolamento geográfico foram 'quebrados' pela chegada de Colombo em 1492?",
-        opts: ["500 anos", "5.000 anos",  "50.000 anos", "12.000 anos"],
+        opts: ["500 anos", "5.000 anos", "50.000 anos", "12.000 anos"],
         correct: [3], hint1: "Pensa no fim da última Idade do Gelo e na submersão da Beríngia.",
         hint2: "Este isolamento remonta ao fim da era glaciar quando os continentes ficaram separados pelo oceano.",
         explain: "Após o fim da última Idade do Gelo e a submersão da Beríngia (a ponte terrestre entre a Ásia e a América do Norte), os continentes estiveram isolados cerca de 12.000 anos. Em 1492, Colombo 'reunificou' biologicamente estes mundos.",
@@ -3144,7 +3552,7 @@
         q: "Antes de 1492, os indígenas americanos possuíam grandes animais de carga, como bois e cavalos.",
         opts: ["Verdadeiro", "Falso"],
         correct: [1], hint1: "Pensa nos poucos animais domesticáveis que existiam nas Américas.",
-        hint2: "A lama e a alpaca eram as principais exceções — mas apenas nos Andes.",
+        hint2: "A Lama e a alpaca eram as principais exceções — mas apenas nos Andes.",
         explain: "FALSO. As Américas tinham muito poucos animais domesticáveis de grande porte. A Lama e a Alpaca (nos Andes) eram as principais exceções. O cavalo tinha-se extinguido na América há cerca de 10.000 anos e só regressou com os europeus.",
         correction: "As Américas tinham muito poucos grandes animais domesticáveis — apenas a lama e a alpaca nos Andes. O cavalo foi reintroduzido pelos europeus."
       },
@@ -3697,7 +4105,10 @@
         if (testTimeLeft <= 60) el.classList.add('warning');
         if (testTimeLeft <= 30) el.classList.replace('warning', 'danger');
       }
-      document.getElementById('topbar-test-info').textContent = `⏱ ${m}:${s.toString().padStart(2, '0')} restantes`;
+      const topInfo = document.getElementById('topbar-test-info');
+      if (topInfo) {
+        topInfo.textContent = `⏱ ${m}:${s.toString().padStart(2, '0')} restantes`;
+      }
     }
 
     function renderTestQuestion() {
@@ -3741,8 +4152,17 @@
       }
 
       // Q timer ring
-      const circumference = 2 * Math.PI * 22;
+      const r = 22;
+      const circumference = 2 * Math.PI * r;
       const dashOffset = circumference * (1 - testQTimeLeft / 30);
+      const timerHtml = `
+      <div class="timer-ring">
+        <svg>
+          <circle cx="30" cy="30" r="${r}" stroke="#e7e5e4" stroke-width="4" fill="transparent"></circle>
+          <circle id="q-timer-progress" cx="30" cy="30" r="${r}" stroke="var(--bronze-500)" stroke-width="4" fill="transparent" stroke-dasharray="${circumference}" stroke-dashoffset="${dashOffset}" stroke-linecap="round"></circle>
+        </svg>
+        <div class="timer-num" id="q-timer-text">${testQTimeLeft}</div>
+      </div>`;
 
       cont.innerHTML = `
     <div class="test-header">
@@ -3754,7 +4174,10 @@
     </div>
     ${trackerHtml}
     <div class="question-card">
-      <div class="question-num">Questão ${testCurrentQ + 1} · ${q.topic}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div class="question-num">Questão ${testCurrentQ + 1} · ${q.topic}</div>
+        ${timerHtml}
+      </div>
       ${q.type === 'multi' ? '<div style="font-size:12px;color:var(--bronze-600);margin-bottom:8px;font-weight:500">🔢 Seleciona TODAS as corretas</div>' : ''}
       <div class="question-text">${q.q}</div>
       ${optsHtml}
@@ -3774,8 +4197,10 @@
     function startQTimer() {
       clearInterval(qtimerInterval);
       testQTimeLeft = 30;
+      updateQTimerVisuals();
       qtimerInterval = setInterval(() => {
         testQTimeLeft--;
+        updateQTimerVisuals();
         if (testQTimeLeft <= 0) {
           clearInterval(qtimerInterval);
           // Auto-advance
@@ -3783,6 +4208,18 @@
           else { finishTest(); }
         }
       }, 1000);
+    }
+
+    function updateQTimerVisuals() {
+      const textEl = document.getElementById('q-timer-text');
+      const circleEl = document.getElementById('q-timer-progress');
+      if (textEl) textEl.textContent = testQTimeLeft;
+      if (circleEl) {
+        const r = 22;
+        const c = 2 * Math.PI * r;
+        const offset = c * (1 - testQTimeLeft / 30);
+        circleEl.style.strokeDashoffset = offset;
+      }
     }
 
     let testMultiSelected = {};
@@ -4520,398 +4957,6 @@
       setTimeout(initWelcome, 600);
     });
   </script>
-  <!-- WELCOME OVERLAY (first visit) -->
-  <div id="welcome-overlay" class="welcome-overlay" style="display:none">
-    <div class="welcome-box">
-      <div class="welcome-hero">
-        <span class="welcome-globe">🌍</span>
-        <div class="welcome-title">Bem-vindo ao Guia de Estudo<br>do Intercâmbio Colombiano!</div>
-        <div class="welcome-sub">Uma aplicação interativa para alunos do 2.º e 3.º ciclo.<br>Explora, aprende e testa os
-          teus conhecimentos.</div>
-      </div>
-      <div class="welcome-body">
-        <div class="welcome-features">
-          <div class="welcome-feat"><span class="welcome-feat-icon">📖</span>Modo Estudo com dicas</div>
-          <div class="welcome-feat"><span class="welcome-feat-icon">⏱️</span>Modo Teste cronometrado</div>
-          <div class="welcome-feat"><span class="welcome-feat-icon">🎯</span>Questões por tópico</div>
-          <div class="welcome-feat"><span class="welcome-feat-icon">🃏</span>Flash Cards &amp; Quiz</div>
-          <div class="welcome-feat"><span class="welcome-feat-icon">📊</span>Dashboard de progresso</div>
-          <div class="welcome-feat"><span class="welcome-feat-icon">🏆</span>Badges e pontos</div>
-        </div>
-        <button class="welcome-start" onclick="closeWelcome(true)">Começar a Explorar 🚀</button>
-        <span class="welcome-skip" onclick="closeWelcome(false)">Já conheço a aplicação — saltar</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- GUIDE MODAL -->
-  <div class="modal-overlay" id="guide-overlay" onclick="handleGuideClick(event)" style="display:none">
-    <div class="modal-box guide-modal" id="guide-box">
-      <button class="modal-close" onclick="closeGuide()"
-        style="position:absolute;top:12px;right:12px;z-index:10">✕</button>
-
-      <div class="guide-header">
-        <h2>📘 Guia de Utilizador</h2>
-        <p>Tudo o que precisas saber para tirar o máximo partido desta aplicação de estudo.</p>
-      </div>
-
-      <div class="guide-body" id="guide-body">
-
-        <!-- 1. MODOS DE ESTUDO -->
-        <div class="guide-acc-item open" id="gacc-1">
-          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-1')">
-            <div class="guide-acc-icon-wrap">🎓</div>
-            <div style="flex:1">
-              <div class="guide-acc-title">Modos de Estudo</div>
-              <div class="guide-acc-sub">Como usar cada modo disponível</div>
-            </div>
-            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </div>
-          <div class="guide-acc-body">
-            <div class="guide-acc-content">
-              <div class="gc-mode-row">
-                <div class="gc-mode-badge">📖</div>
-                <div>
-                  <div class="gc-mode-label">Modo Estudo</div>
-                  <div class="gc-mode-desc"><strong>45 questões</strong> com feedback imediato após cada resposta. Se
-                    demorares, surgem dicas automáticas aos <strong>30s</strong> e <strong>60s</strong>. Podes saltar
-                    questões, revê-las pelo tracker visual e recomeçar quando quiseres.</div>
-                </div>
-              </div>
-              <div class="gc-mode-row">
-                <div class="gc-mode-badge">⏱️</div>
-                <div>
-                  <div class="gc-mode-label">Modo Teste</div>
-                  <div class="gc-mode-desc"><strong>25 questões</strong> em <strong>10 minutos</strong>. Cada questão
-                    tem um limite de <strong>30 segundos</strong> — se não responderes, avança automaticamente. Sem
-                    feedback durante o teste. Resultados detalhados e revisão completa no final.</div>
-                </div>
-              </div>
-              <div class="gc-mode-row">
-                <div class="gc-mode-badge">🎯</div>
-                <div>
-                  <div class="gc-mode-label">Modo Personalizado</div>
-                  <div class="gc-mode-desc">Filtra as questões por <strong>tópico</strong> usando os chips de seleção.
-                    Ideal para rever especificamente as áreas onde tens mais dificuldade. Tem as mesmas funcionalidades
-                    do Modo Estudo.</div>
-                </div>
-              </div>
-              <div class="gc-mode-row">
-                <div class="gc-mode-badge">🃏</div>
-                <div>
-                  <div class="gc-mode-label">Flash Cards</div>
-                  <div class="gc-mode-desc"><strong>12 cartões</strong> com conceito na frente e definição no verso.
-                    Clica no cartão para virar. Usa os botões de navegação ou o botão <em>Baralhar</em> para praticar em
-                    ordem aleatória.</div>
-                </div>
-              </div>
-              <div class="gc-mode-row">
-                <div class="gc-mode-badge">🎮</div>
-                <div>
-                  <div class="gc-mode-label">Quiz Cards</div>
-                  <div class="gc-mode-desc">O cartão <strong>só vira</strong> quando escolhes a resposta correta.
-                    Aprendizagem por tentativa e erro — sem frustração, com reforço positivo imediato.</div>
-                </div>
-              </div>
-              <div class="gc-mode-row" style="border-bottom:none;padding-bottom:0">
-                <div class="gc-mode-badge">📝</div>
-                <div>
-                  <div class="gc-mode-label">Resumos Explicativos</div>
-                  <div class="gc-mode-desc"><strong>7 temas</strong> em acordeão expandível, baseados nas fontes
-                    académicas. Clica no título de qualquer tema para o expandir e ler o conteúdo detalhado.</div>
-                </div>
-              </div>
-              <div class="guide-tip">💡 <strong>Sugestão pedagógica:</strong> Começa pelos <strong>Resumos</strong> para
-                consolidar a teoria, depois pratica no <strong>Modo Estudo</strong>, e só então avalia-te no
-                <strong>Modo Teste</strong>!
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. TIPOS DE QUESTÕES -->
-        <div class="guide-acc-item" id="gacc-2">
-          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-2')">
-            <div class="guide-acc-icon-wrap">❓</div>
-            <div style="flex:1">
-              <div class="guide-acc-title">Tipos de Questões</div>
-              <div class="guide-acc-sub">Como responder a cada formato</div>
-            </div>
-            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </div>
-          <div class="guide-acc-body">
-            <div class="guide-acc-content">
-              <div class="gc-step">
-                <div class="gc-step-dot">A</div>
-                <div>
-                  <div class="gc-step-title">Escolha Múltipla (MC) — 39 questões</div>
-                  <div class="gc-step-desc">Quatro opções (A, B, C, D). Clica numa para responder. O feedback surge
-                    imediatamente com a explicação detalhada da resposta correta.</div>
-                </div>
-              </div>
-              <div class="gc-step">
-                <div class="gc-step-dot">☑</div>
-                <div>
-                  <div class="gc-step-title">Seleção Múltipla — 2 questões</div>
-                  <div class="gc-step-desc">Identificadas por <strong>"Seleciona TODAS as corretas"</strong>. Marca
-                    todas as opções que considerares corretas e clica em <strong>Confirmar</strong>. Tens de acertar em
-                    todas para pontuar.</div>
-                </div>
-              </div>
-              <div class="gc-step">
-                <div class="gc-step-dot">V/F</div>
-                <div>
-                  <div class="gc-step-title">Verdadeiro / Falso — 4 questões</div>
-                  <div class="gc-step-desc">Dois botões: <span
-                      style="color:var(--success);font-weight:600">Verdadeiro</span> e <span
-                      style="color:var(--error);font-weight:600">Falso</span>. Se errares, a aplicação mostra a
-                    afirmação corrigida com a explicação completa.</div>
-                </div>
-              </div>
-              <div class="gc-step">
-                <div class="gc-step-dot">💡</div>
-                <div>
-                  <div class="gc-step-title">Sistema de Dicas Progressivas</div>
-                  <div class="gc-step-desc">No Modo Estudo e Personalizado, se estiveres mais de <strong>30
-                      segundos</strong> sem responder, aparece o botão <em>Dica 1</em>. Após <strong>60
-                      segundos</strong>, aparece a <em>Dica 2</em>. Clica para as revelar.</div>
-                </div>
-              </div>
-              <div class="gc-step" style="border-bottom:none;padding-bottom:0">
-                <div class="gc-step-dot">⏭</div>
-                <div>
-                  <div class="gc-step-title">Navegação Livre</div>
-                  <div class="gc-step-desc">Usa o <strong>tracker visual</strong> no topo (quadradinhos numerados) para
-                    saltar para qualquer questão. As cores mostram o estado: <span style="color:var(--success)">■
-                      certa</span>, <span style="color:var(--error)">■ errada</span>, ■ atual.</div>
-                </div>
-              </div>
-              <div class="guide-tip">🎯 As questões têm 3 níveis de dificuldade: <strong>🟢 Fácil (10 pts) · 🟡 Médio
-                  (20 pts) · 🔴 Difícil (30 pts)</strong>. Questões mais difíceis valem mais pontos!</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. PONTOS & BADGES -->
-        <div class="guide-acc-item" id="gacc-3">
-          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-3')">
-            <div class="guide-acc-icon-wrap">🏆</div>
-            <div style="flex:1">
-              <div class="guide-acc-title">Pontos &amp; Badges</div>
-              <div class="guide-acc-sub">Sistema de recompensas e progressão</div>
-            </div>
-            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </div>
-          <div class="guide-acc-body">
-            <div class="guide-acc-content">
-              <div class="gc-pts-row">
-                <span class="gc-pts-lbl">🟢 Questão Fácil (Modo Estudo / Personalizado)</span>
-                <span class="gc-pts-val">+10 pts</span>
-              </div>
-              <div class="gc-pts-row">
-                <span class="gc-pts-lbl">🟡 Questão Média (Modo Estudo / Personalizado)</span>
-                <span class="gc-pts-val">+20 pts</span>
-              </div>
-              <div class="gc-pts-row">
-                <span class="gc-pts-lbl">🔴 Questão Difícil (Modo Estudo / Personalizado)</span>
-                <span class="gc-pts-val">+30 pts</span>
-              </div>
-              <div class="gc-pts-row" style="border-bottom:none">
-                <span class="gc-pts-lbl">⏱️ Qualquer questão correta (Modo Teste)</span>
-                <span class="gc-pts-val">+15 pts</span>
-              </div>
-              <div
-                style="margin:14px 0 10px;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">
-                🔥 Streak — Série de respostas certas</div>
-              <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:14px">Responde
-                corretamente várias vezes <strong>sem errar</strong> para manter a tua série. Se errares, a série
-                recomeça a zero. A tua melhor série fica guardada no <strong>Dashboard</strong>. Com 3+ respostas
-                seguidas, aparece uma barra de chamas 🔥 no topo do modo.</div>
-              <div
-                style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">
-                🏅 Badges disponíveis</div>
-              <div class="gc-badge-grid">
-                <div class="gc-badge-card">
-                  <div class="gc-badge-em">🌱</div>
-                  <div>
-                    <div class="gc-badge-name">Designer Iniciante</div>
-                    <div class="gc-badge-cond">15 respostas certas seguidas no Modo Estudo ou Personalizado</div>
-                  </div>
-                </div>
-                <div class="gc-badge-card">
-                  <div class="gc-badge-em">🎓</div>
-                  <div>
-                    <div class="gc-badge-name">Designer Expert</div>
-                    <div class="gc-badge-cond">Acumular 500 ou mais pontos no total</div>
-                  </div>
-                </div>
-                <div class="gc-badge-card">
-                  <div class="gc-badge-em">💎</div>
-                  <div>
-                    <div class="gc-badge-name">Perfeccionista</div>
-                    <div class="gc-badge-cond">100% de acertos num Modo Teste completo</div>
-                  </div>
-                </div>
-                <div class="gc-badge-card">
-                  <div class="gc-badge-em">🔥</div>
-                  <div>
-                    <div class="gc-badge-name">Em Chamas</div>
-                    <div class="gc-badge-cond">25 respostas certas seguidas no Modo Estudo ou Personalizado</div>
-                  </div>
-                </div>
-              </div>
-              <div class="guide-tip">📊 Vai ao <strong>Dashboard</strong> (menu lateral) para veres as tuas estatísticas
-                detalhadas por modo, a tua melhor série e os badges já conquistados.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. MULTIMÉDIA -->
-        <div class="guide-acc-item" id="gacc-4">
-          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-4')">
-            <div class="guide-acc-icon-wrap">🎬</div>
-            <div style="flex:1">
-              <div class="guide-acc-title">Recursos Multimédia</div>
-              <div class="guide-acc-sub">Como aceder e usar cada recurso</div>
-            </div>
-            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </div>
-          <div class="guide-acc-body">
-            <div class="guide-acc-content">
-              <div class="gc-file">
-                <div class="gc-file-icon">🗺️</div>
-                <div>
-                  <div class="gc-file-name">Infografia</div>
-                  <div><span class="gc-file-path">./infografia.jpg</span></div>
-                  <div class="gc-file-desc">Abre numa janela modal. Clica na imagem para aplicar um <strong>zoom
-                      adicional</strong> e explorar os detalhes. Clica fora para fechar.</div>
-                </div>
-              </div>
-              <div class="gc-file">
-                <div class="gc-file-icon">🎥</div>
-                <div>
-                  <div class="gc-file-name">Vídeo Resumo</div>
-                  <div><span class="gc-file-path">./video.mp4</span></div>
-                  <div class="gc-file-desc">Reproduz diretamente no browser com os controlos nativos (play, pausa,
-                    volume, ecrã inteiro).</div>
-                </div>
-              </div>
-              <div class="gc-file">
-                <div class="gc-file-icon">🎧</div>
-                <div>
-                  <div class="gc-file-name">Podcast</div>
-                  <div><span class="gc-file-path">./podcast.mp3</span></div>
-                  <div class="gc-file-desc">Player de áudio integrado. Podes <strong>ouvir enquanto estudas</strong>
-                    noutras secções da aplicação — mantém a janela modal aberta.</div>
-                </div>
-              </div>
-              <div class="gc-file" style="border-bottom:none;padding-bottom:0">
-                <div class="gc-file-icon">📊</div>
-                <div>
-                  <div class="gc-file-name">Slides (1 a 14)</div>
-                  <div><span class="gc-file-path">./slides1.jpg</span> … <span
-                      class="gc-file-path">./slides14.jpg</span></div>
-                  <div class="gc-file-desc">Navega com os botões <strong>← →</strong> ou clica nos
-                    <strong>pontos</strong> de navegação. No teclado, usa as <strong>teclas ← →</strong>. Clica em
-                    qualquer slide para zoom. A tecla <strong>Esc</strong> fecha o modal.
-                  </div>
-                </div>
-              </div>
-              <div class="guide-tip">📁 <strong>Instalação:</strong> Coloca todos os ficheiros de media (<code
-                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">infografia.jpg</code>,
-                <code
-                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">video.mp4</code>,
-                <code
-                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">podcast.mp3</code>,
-                <code
-                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">slides1.jpg</code>…<code
-                  style="font-size:11px;background:var(--bronze-100);padding:1px 5px;border-radius:3px">slides14.jpg</code>)
-                <strong>na mesma pasta</strong> que este ficheiro HTML.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. TOUR GUIADO -->
-        <div class="guide-acc-item" id="gacc-5">
-          <div class="guide-acc-header" onclick="toggleGuideAcc('gacc-5')">
-            <div class="guide-acc-icon-wrap">🗺️</div>
-            <div style="flex:1">
-              <div class="guide-acc-title">Tour Guiado da Interface</div>
-              <div class="guide-acc-sub">Percorre os elementos principais em 6 passos</div>
-            </div>
-            <svg class="guide-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </div>
-          <div class="guide-acc-body">
-            <div class="guide-acc-content">
-              <div class="gc-step">
-                <div class="gc-step-dot">1</div>
-                <div>
-                  <div class="gc-step-title">Menu de Navegação (Sidebar)</div>
-                  <div class="gc-step-desc">Acesso a todos os modos de estudo, conteúdos e Dashboard. Visível em
-                    desktop; em mobile abre com o botão ☰.</div>
-                </div>
-              </div>
-              <div class="gc-step">
-                <div class="gc-step-dot">2</div>
-                <div>
-                  <div class="gc-step-title">Contador de Pontos</div>
-                  <div class="gc-step-desc">No fundo do menu lateral — atualizado em tempo real após cada resposta
-                    correta.</div>
-                </div>
-              </div>
-              <div class="gc-step">
-                <div class="gc-step-dot">3</div>
-                <div>
-                  <div class="gc-step-title">Barra Superior (Topbar)</div>
-                  <div class="gc-step-desc">Mostra o título da página atual e ações contextuais. O botão
-                    <strong>?</strong> abre sempre este guia.
-                  </div>
-                </div>
-              </div>
-              <div class="gc-step">
-                <div class="gc-step-dot">4</div>
-                <div>
-                  <div class="gc-step-title">Painel de Início</div>
-                  <div class="gc-step-desc">Cartões de acesso rápido a todos os modos. Clica num cartão para começar
-                    imediatamente.</div>
-                </div>
-              </div>
-              <div class="gc-step" style="border-bottom:none;padding-bottom:0">
-                <div class="gc-step-dot">5</div>
-                <div>
-                  <div class="gc-step-title">Dashboard</div>
-                  <div class="gc-step-desc">Estatísticas por modo, tabela de progresso, badges conquistados e botão para
-                    limpar o histórico.</div>
-                </div>
-              </div>
-              <div class="guide-tour-launch">
-                <button class="btn btn-primary" onclick="closeGuide();startTour()">🚀 Iniciar Tour Interativo</button>
-                <p>O tour destaca 6 elementos com balões explicativos.<br>Usa o botão <strong>Próximo →</strong> ou a
-                  tecla <strong>Esc</strong> para sair.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- .guide-body -->
-    </div>
-  </div>
-
-  <!-- TOUR ELEMENTS -->
-  <div id="tour-highlight" class="tour-highlight" style="display:none"></div>
-  <div id="tour-bubble" class="tour-bubble" style="display:none"></div>
-
 </body>
 
 </html>
